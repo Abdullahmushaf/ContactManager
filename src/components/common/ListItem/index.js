@@ -12,7 +12,14 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ListItem = ({ firstName, lastName, email, contact }) => {
+const ListItem = ({
+  id,
+  firstName,
+  lastName,
+  email,
+  contact,
+  currentContactHandler,
+}) => {
   return (
     <MuiListItem
       sx={{
@@ -24,7 +31,20 @@ const ListItem = ({ firstName, lastName, email, contact }) => {
       }}
       secondaryAction={
         <Stack>
-          <IconButton edge="end" aria-label="edit">
+          <IconButton
+            edge="end"
+            aria-label="edit"
+            onClick={() =>
+              currentContactHandler({
+                id,
+                firstName,
+                lastName,
+                email,
+                contact,
+                releation: "personal",
+              })
+            }
+          >
             <EditIcon />
           </IconButton>
           <IconButton edge="end" aria-label="delete">

@@ -1,21 +1,26 @@
 import { List, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../styles";
 import ListItem from "../../../common/ListItem";
+import ContactContext from "../../../../context/contact/contactContext";
 
-const ContactList = ({ contactsArr }) => {
+const ContactList = () => {
+  const { contacts, currentContactHandler, updateContactHandler } = useContext(ContactContext);
   return (
     <>
       <TextField label="Search Contacts" fullWidth sx={{ mb: 2 }} />
       <List sx={styles.list}>
-        {contactsArr && contactsArr.length ? (
-          contactsArr.map((data) => (
+        {contacts && contacts.length ? (
+          contacts.map((data) => (
             <ListItem
               key={data.id}
+              id={data.id}
               firstName={data.firstName}
               lastName={data.lastName}
               email={data.email}
               contact={data.contact}
+              currentContactHandler={currentContactHandler}
+              updateContactHandler={updateContactHandler}
             />
           ))
         ) : (
