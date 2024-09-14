@@ -10,17 +10,28 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AuthContext from "../../../context/auth/authContext";
+import AlertContext from "../../../context/alert/alertContext";
 
 const SignUp = () => {
+  const { registerUserHandler, error } = useContext(AuthContext);
+  const { alertHandler } = useContext(AlertContext);
+
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (error !== null) {
+      alertHandler(error);
+    }
+  }, [error]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -37,7 +48,7 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+    registerUserHandler(data);
   };
 
   return (

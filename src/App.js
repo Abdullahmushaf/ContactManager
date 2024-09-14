@@ -4,15 +4,19 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import Alert from "./components/common/Alert";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
+    <div>
+      <Alert />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </div>
   );
 };
 

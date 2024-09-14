@@ -10,11 +10,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AuthContext from "../../../context/auth/authContext";
 
 const Login = () => {
+  const { loginUserHandler } = useContext(AuthContext);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -36,7 +38,7 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+    loginUserHandler(data);
   };
 
   return (
