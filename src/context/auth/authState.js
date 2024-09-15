@@ -26,7 +26,10 @@ const AuthState = ({ children }) => {
       const res = await axiosInstance.post("/users", data);
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data });
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err?.response?.data?.msg ?? err?.response?.data?.errors,
+      });
       console.log(err);
     }
   };
@@ -36,7 +39,10 @@ const AuthState = ({ children }) => {
       const res = await axiosInstance.post("/auth", data);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data });
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data?.msg ?? err.response.data?.errors,
+      });
       console.log(err);
     }
   };

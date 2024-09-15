@@ -15,10 +15,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AuthContext from "../../../context/auth/authContext";
 import AlertContext from "../../../context/alert/alertContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { registerUserHandler, error } = useContext(AuthContext);
   const { alertHandler } = useContext(AlertContext);
+
+  console.log(error);
 
   const [data, setData] = useState({
     name: "",
@@ -29,7 +32,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (error !== null) {
-      alertHandler(error);
+      alertHandler(error, "error");
     }
   }, [error]);
 
@@ -49,6 +52,7 @@ const SignUp = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     registerUserHandler(data);
+    if (error !== null) alertHandler(error, "error");
   };
 
   return (

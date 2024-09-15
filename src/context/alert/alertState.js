@@ -4,7 +4,6 @@ import reducer from "./alertReducer";
 import { CLEAR_ALERT, SET_ALERT } from "../type";
 
 const initialState = [];
-//   id: Math.floor(Math.random() * 9000000) + 1000000,
 
 const AlertState = ({ children }) => {
   const id = Math.floor(Math.random() * 9000000) + 1000000;

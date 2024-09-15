@@ -10,18 +10,28 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AuthContext from "../../../context/auth/authContext";
+import AlertContext from "../../../context/alert/alertContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { loginUserHandler } = useContext(AuthContext);
+  const { loginUserHandler, error } = useContext(AuthContext);
+  const { alertHandler } = useContext(AlertContext);
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (error !== null) {
+      alertHandler(error, "error");
+    }
+  }, [error]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -39,6 +49,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     loginUserHandler(data);
+    if (error !== null) alertHandler(error, "error");
   };
 
   return (
